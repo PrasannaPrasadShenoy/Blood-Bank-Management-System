@@ -23,4 +23,3 @@ The Blood Bank Management System is a Python-based application designed to effic
 #### **Contributing**  
 Contributions are welcome! Feel free to fork the repository and submit pull requests for improvements.  
 
-Let me know if you need further refinements! 🚀
