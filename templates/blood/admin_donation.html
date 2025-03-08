@@ -1,0 +1,182 @@
+{% extends 'blood/adminbase.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{%load static%}
+<head>
+    <style>
+        /* Style for labels (Approved, Rejected, Pending) */
+        .label {
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .success {
+            background-color: #4CAF50; /* Green */
+        }
+
+        .info {
+            background-color: #2196F3; /* Blue */
+        }
+
+        .warning {
+            background-color: #ff9800; /* Orange */
+        }
+
+        .danger {
+            background-color: #f44336; /* Red */
+        }
+
+        .other {
+            background-color: #e7e7e7;
+            color: black; /* Gray */
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transition: background 0.5s ease-in-out;
+        }
+
+        .container:hover {
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
+        }
+
+        /* Heading "My Donation History" Styling */
+        h4 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+            transition: color 0.3s, font-weight 0.3s;
+        }
+
+        h4:hover {
+            color: #2196F3;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Open Sans', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 12px 15px;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #2196F3;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        /* Row Hover Effect */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e1f5fe; /* Light blue */
+            cursor: pointer;
+        }
+
+        /* Button Styling */
+        .btn {
+            font-family: 'Open Sans', sans-serif;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Adding Animation to Background */
+        body {
+            background: linear-gradient(45deg,   #f4cccc, #e0e0e0);
+            background-size: 400% 400%;
+       
+            background-color: #f4cccc; /* Soft Light Red */
+
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+    </style>
+   </head>
+<br><br>
+<div class="container">
+    <H4 class="text-center">BLOOD DONATION DETAILS</H4><br>
+    <table class="table table-light table-hover table-bordered table-striped">
+        <thead class="bg-info">
+            <tr>
+                <th scope="col">Donor Name</th>
+                <th scope="col">Disease</th>
+                <th scope="col">Age</th>
+                <th scope="col">Blood Group</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Request Date</th>
+                <th scope="col">Status</th>
+                <th class="text-right">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in donations %}
+            <tr>
+                <td> {{t.donor}}</td>
+                <td> {{t.disease}}</td>
+                <td> {{t.age}}</td>
+                <td>{{t.bloodgroup}}</td>
+                <td>{{t.unit}}</td>
+                <td>{{t.date}}</td>
+                <td>{{t.status}}</td>
+                {% if t.status == 'Pending' %}
+                <td class="text-right">
+                    <button class="btn btn-primary badge-pill" style="width: 100px;"><a  style="text-decoration: none;color: white;" href="{% url 'approve-donation' t.id  %}">APPROVE</a> </button>
+                    <button class="btn btn-danger badge-pill" style="width: 80px;"><a  style="text-decoration: none;color: white;" href="{% url 'reject-donation' t.id  %}">REJECT</a> </button>
+                </td>
+                {% elif  t.status == 'Approved' %}
+                <td><span class="label warning">{{t.unit}} Unit Added To Stock</span></td>
+
+                {% else %}
+                <td><span class="label danger">0 Unit Added To Stock</span></td> 
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    
+    </table>
+</div>
+
+
+{% endblock content %}

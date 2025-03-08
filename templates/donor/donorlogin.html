@@ -1,0 +1,203 @@
+{%load static%}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.css">
+ 
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Main CSS-->
+    <link href="{% static "css/main.css" %}"rel="stylesheet" media="all">
+    
+        <style>
+        /* Style for labels (Approved, Rejected, Pending) */
+        .label {
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .success {
+            background-color: #4CAF50; /* Green */
+        }
+
+        .info {
+            background-color: #2196F3; /* Blue */
+        }
+
+        .warning {
+            background-color: #ff9800; /* Orange */
+        }
+
+        .danger {
+            background-color: #f44336; /* Red */
+        }
+
+        .other {
+            background-color: #e7e7e7;
+            color: black; /* Gray */
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.2));
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transition: background 0.5s ease-in-out;
+        }
+
+        .container:hover {
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.3));
+        }
+
+        /* Heading "My Donation History" Styling */
+        h4 {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+            transition: color 0.3s, font-weight 0.3s;
+        }
+
+        h4:hover {
+            color: #2196F3;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Open Sans', sans-serif;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 12px 15px;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #2196F3;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        /* Row Hover Effect */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e1f5fe; /* Light blue */
+            cursor: pointer;
+        }
+
+        /* Button Styling */
+        .btn {
+            font-family: 'Open Sans', sans-serif;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Adding Animation to Background */
+        body {
+            background: linear-gradient(45deg,   #f4cccc, #e0e0e0);
+            background-size: 400% 400%;
+       
+            background-color: #f4cccc; /* Soft Light Red */
+
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+    </style>
+  </head>
+  <body>
+    {% include "blood/navbar.html" %}
+
+
+
+
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <br><br><br>
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">Donor Login</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="name">Username</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    {% render_field form.username class="input--style-5"%}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Password</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    {% render_field form.password class="input--style-5" %}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+
+                        <div>
+                            <button class="btn btn--radius-2 btn-danger" type="submit">Login</button>
+                        </div>
+                    </form>
+                    <br>
+                    <p style="text-align: center;">Does not have an account ? <a style="text-decoration: none;" href="/donor/donorsignup">Click here to register</a></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% include "blood/footer.html" %}
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </body>
+</html>

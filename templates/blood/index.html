@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .xyz {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 0;
+            height: 100%;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    {% include "blood/navbar.html" %}
+    <section id="section-jumbotron" class="xyz">
+        <div class="left">
+            <h1 style="color: red; font-size: 50px; font-family: 'Playfair Display', serif;">
+                Donate Blood, Save Life!
+            </h1>
+            <p style="color: black; font-size: 70px; font-family: 'Poppins', sans-serif; font-weight: 800;">
+                Saving Blood made easier.
+            </p>
+        </div>
+        <div style="margin-right: 30px">
+            <img src="{% static 'image/bgimage1.jpg' %}" alt="Sample Image" style="height: 800px;">
+        </div>
+    </section>
+    <footer>
+        {% include "blood/footer.html" %}
+    </footer>
+</body>
+</html>
+
+
